@@ -6118,7 +6118,7 @@ impl ApiKeysWidget {
         /// Helper function to render the UI for an API key input field.
         fn render_api_key_input(
             appearance: &Appearance,
-            label: &str,
+            label: &'static str,
             editor: ViewHandle<EditorView>,
             is_enabled: bool,
             app: &AppContext,
@@ -6135,13 +6135,9 @@ impl ApiKeysWidget {
                 ..Default::default()
             };
 
-            let label = Text::new_inline(
-                label.to_owned(),
-                appearance.ui_font_family(),
-                CONTENT_FONT_SIZE,
-            )
-            .with_color(styles::header_font_color(is_enabled, app).into())
-            .finish();
+            let label = Text::new_inline(label, appearance.ui_font_family(), CONTENT_FONT_SIZE)
+                .with_color(styles::header_font_color(is_enabled, app).into())
+                .finish();
 
             let input = appearance
                 .ui_builder()

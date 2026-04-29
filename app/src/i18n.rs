@@ -69,6 +69,10 @@ pub fn t(english: &'static str) -> &'static str {
 
 /// Returns the Simplified Chinese translation for a given English string,
 /// or falls back to the original English string if no translation exists.
+///
+/// The final catch-all arm (`other => other`) ensures untranslated strings
+/// are passed through as-is, so the UI always shows something meaningful
+/// even when Chinese translations are not yet provided for a given key.
 fn zh_cn(english: &'static str) -> &'static str {
     match english {
         // ── AI Settings page ──────────────────────────────────────────────────
