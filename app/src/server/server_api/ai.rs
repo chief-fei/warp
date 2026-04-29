@@ -2154,6 +2154,9 @@ impl From<warp_graphql::queries::get_feature_model_choices::LlmProvider> for LLM
             warp_graphql::queries::get_feature_model_choices::LlmProvider::Google => {
                 LLMProvider::Google
             }
+            warp_graphql::queries::get_feature_model_choices::LlmProvider::Deepseek => {
+                LLMProvider::DeepSeek
+            }
             warp_graphql::queries::get_feature_model_choices::LlmProvider::Xai => LLMProvider::Xai,
             warp_graphql::queries::get_feature_model_choices::LlmProvider::Unknown => {
                 LLMProvider::Unknown
@@ -2174,6 +2177,7 @@ impl From<warp_graphql::workspace::LlmProvider> for LLMProvider {
             warp_graphql::workspace::LlmProvider::Openai => LLMProvider::OpenAI,
             warp_graphql::workspace::LlmProvider::Anthropic => LLMProvider::Anthropic,
             warp_graphql::workspace::LlmProvider::Google => LLMProvider::Google,
+            warp_graphql::workspace::LlmProvider::Deepseek => LLMProvider::DeepSeek,
             warp_graphql::workspace::LlmProvider::Xai => LLMProvider::Xai,
             warp_graphql::workspace::LlmProvider::Unknown => LLMProvider::Unknown,
             warp_graphql::workspace::LlmProvider::Other(value) => {

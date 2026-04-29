@@ -3067,7 +3067,7 @@ impl SettingsWidget for GlobalAIWidget {
 
     fn search_terms(&self) -> &str {
         "oz warp agent global ai a.i. active next command prompt code diffs suggestion suggested suggestions \
-                agent mode natural language detection input hint api keys bring your own byo google anthropic openai"
+                agent mode natural language detection input hint api keys bring your own byo google anthropic openai deepseek"
     }
 
     fn render(
@@ -5968,6 +5968,7 @@ struct ApiKeysWidget {
     openai_api_key_editor: ViewHandle<EditorView>,
     anthropic_api_key_editor: ViewHandle<EditorView>,
     google_api_key_editor: ViewHandle<EditorView>,
+    deepseek_api_key_editor: ViewHandle<EditorView>,
 
     can_use_warp_credits_with_byok: SwitchStateHandle,
     upgrade_highlight_index: HighlightedHyperlink,
@@ -5984,6 +5985,7 @@ impl ApiKeysWidget {
             openai: openai_key,
             anthropic: anthropic_key,
             google: google_key,
+            deepseek: deepseek_key,
             ..
         } = ApiKeyManager::as_ref(ctx).keys().clone();
 
@@ -6071,11 +6073,18 @@ impl ApiKeysWidget {
             set_google_key,
             "AIzaSy..."
         );
+        create_api_key_editor!(
+            deepseek_api_key_editor,
+            deepseek_key,
+            set_deepseek_key,
+            "sk-..."
+        );
 
         Self {
             openai_api_key_editor,
             anthropic_api_key_editor,
             google_api_key_editor,
+            deepseek_api_key_editor,
 
             can_use_warp_credits_with_byok: Default::default(),
             upgrade_highlight_index: Default::default(),
@@ -6097,7 +6106,7 @@ impl ApiKeysWidget {
             .with_child(
                 Container::new(
                     render_ai_setting_description(
-                        "Use your own API keys from model providers for the Warp Agent to use. API keys are stored locally and never synced to the cloud. Using auto models or models from providers you have not provided API keys for will consume Warp credits.",
+                        crate::i18n::t("Use your own API keys from model providers for the Warp Agent to use. API keys are stored locally and never synced to the cloud. Using auto models or models from providers you have not provided API keys for will consume Warp credits."),
                         is_enabled,
                         app,
                     ))
@@ -6146,22 +6155,29 @@ impl ApiKeysWidget {
 
         column.add_child(render_api_key_input(
             appearance,
-            "OpenAI API Key",
+            crate::i18n::t("OpenAI API Key"),
             self.openai_api_key_editor.clone(),
             is_enabled,
             app,
         ));
         column.add_child(render_api_key_input(
             appearance,
-            "Anthropic API Key",
+            crate::i18n::t("Anthropic API Key"),
             self.anthropic_api_key_editor.clone(),
             is_enabled,
             app,
         ));
         column.add_child(render_api_key_input(
             appearance,
-            "Google API Key",
+            crate::i18n::t("Google API Key"),
             self.google_api_key_editor.clone(),
+            is_enabled,
+            app,
+        ));
+        column.add_child(render_api_key_input(
+            appearance,
+            crate::i18n::t("DeepSeek API Key"),
+            self.deepseek_api_key_editor.clone(),
             is_enabled,
             app,
         ));
@@ -6261,7 +6277,7 @@ impl SettingsWidget for ApiKeysWidget {
     type View = AISettingsPageView;
 
     fn search_terms(&self) -> &str {
-        "api keys bring your own byo openai anthropic google claude gemini gpt"
+        "api keys bring your own byo openai anthropic google claude gemini gpt deepseek"
     }
 
     fn render(

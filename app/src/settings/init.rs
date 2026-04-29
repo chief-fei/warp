@@ -32,14 +32,17 @@ use crate::{
 use warp_core::semantic_selection::SemanticSelection;
 
 use super::{
-    app_icon::AppIconSettings, app_installation_detection::UserAppInstallDetectionSettings,
-    cloud_preferences::CloudPreferencesSettings, initializer::SettingsInitializer,
-    native_preference::NativePreferenceSettings, AISettings, AccessibilitySettings,
-    AliasExpansionSettings, AppEditorSettings, BlockVisibilitySettings, ChangelogSettings,
-    CodeSettings, DebugSettings, EmacsBindingsSettings, FontSettings, FontSettingsChangedEvent,
-    GPUSettings, InputBoxType, InputModeSettings, InputSettings, PaneSettings,
-    SameLinePromptBlockSettings, ScrollSettings, SelectionSettings, SshSettings, ThemeSettings,
-    VimBannerSettings, WarpDrivePrivacySettings,
+    app_icon::AppIconSettings,
+    app_installation_detection::UserAppInstallDetectionSettings,
+    cloud_preferences::CloudPreferencesSettings,
+    initializer::SettingsInitializer,
+    language::{apply_language_setting, LanguageSettings},
+    native_preference::NativePreferenceSettings,
+    AISettings, AccessibilitySettings, AliasExpansionSettings, AppEditorSettings,
+    BlockVisibilitySettings, ChangelogSettings, CodeSettings, DebugSettings, EmacsBindingsSettings,
+    FontSettings, FontSettingsChangedEvent, GPUSettings, InputBoxType, InputModeSettings,
+    InputSettings, PaneSettings, SameLinePromptBlockSettings, ScrollSettings, SelectionSettings,
+    SshSettings, ThemeSettings, VimBannerSettings, WarpDrivePrivacySettings,
 };
 
 pub struct UserDefaultsOnStartup {
@@ -98,6 +101,7 @@ pub fn register_all_settings(ctx: &mut AppContext) {
     EmacsBindingsSettings::register(ctx);
     SameLinePromptBlockSettings::register(ctx);
     SemanticSelection::register(ctx);
+    LanguageSettings::register(ctx);
 
     #[cfg(target_os = "linux")]
     super::LinuxAppConfiguration::register(ctx);
@@ -118,6 +122,10 @@ pub fn init(
     ctx.add_singleton_model(|_| SettingsInitializer::new());
 
     register_all_settings(ctx);
+
+    // Apply the user's preferred display language to the global i18n module so
+    // that all subsequent `i18n::t()` calls return the correct translations.
+    apply_language_setting(ctx);
 
     // One-time migration: copy public settings from the platform-native store
     // into the TOML file so existing users don't lose their customizations

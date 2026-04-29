@@ -69,6 +69,7 @@ pub enum LlmProvider {
     Openai,
     Anthropic,
     Google,
+    Deepseek,
     Xai,
     Unknown,
     #[cynic(fallback)]

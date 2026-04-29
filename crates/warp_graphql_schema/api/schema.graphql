@@ -1880,6 +1880,7 @@ type LlmPricing {
 
 enum LlmProvider {
   ANTHROPIC
+  DEEPSEEK
   GOOGLE
   OPENAI
   UNKNOWN
