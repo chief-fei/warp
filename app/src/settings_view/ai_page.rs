@@ -6106,7 +6106,7 @@ impl ApiKeysWidget {
             .with_child(
                 Container::new(
                     render_ai_setting_description(
-                        "Use your own API keys from model providers for the Warp Agent to use. API keys are stored locally and never synced to the cloud. Using auto models or models from providers you have not provided API keys for will consume Warp credits.",
+                        crate::i18n::t("Use your own API keys from model providers for the Warp Agent to use. API keys are stored locally and never synced to the cloud. Using auto models or models from providers you have not provided API keys for will consume Warp credits."),
                         is_enabled,
                         app,
                     ))
@@ -6118,7 +6118,7 @@ impl ApiKeysWidget {
         /// Helper function to render the UI for an API key input field.
         fn render_api_key_input(
             appearance: &Appearance,
-            label: &'static str,
+            label: &str,
             editor: ViewHandle<EditorView>,
             is_enabled: bool,
             app: &AppContext,
@@ -6135,9 +6135,13 @@ impl ApiKeysWidget {
                 ..Default::default()
             };
 
-            let label = Text::new_inline(label, appearance.ui_font_family(), CONTENT_FONT_SIZE)
-                .with_color(styles::header_font_color(is_enabled, app).into())
-                .finish();
+            let label = Text::new_inline(
+                label.to_owned(),
+                appearance.ui_font_family(),
+                CONTENT_FONT_SIZE,
+            )
+            .with_color(styles::header_font_color(is_enabled, app).into())
+            .finish();
 
             let input = appearance
                 .ui_builder()
@@ -6155,28 +6159,28 @@ impl ApiKeysWidget {
 
         column.add_child(render_api_key_input(
             appearance,
-            "OpenAI API Key",
+            crate::i18n::t("OpenAI API Key"),
             self.openai_api_key_editor.clone(),
             is_enabled,
             app,
         ));
         column.add_child(render_api_key_input(
             appearance,
-            "Anthropic API Key",
+            crate::i18n::t("Anthropic API Key"),
             self.anthropic_api_key_editor.clone(),
             is_enabled,
             app,
         ));
         column.add_child(render_api_key_input(
             appearance,
-            "Google API Key",
+            crate::i18n::t("Google API Key"),
             self.google_api_key_editor.clone(),
             is_enabled,
             app,
         ));
         column.add_child(render_api_key_input(
             appearance,
-            "DeepSeek API Key",
+            crate::i18n::t("DeepSeek API Key"),
             self.deepseek_api_key_editor.clone(),
             is_enabled,
             app,

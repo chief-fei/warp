@@ -20,6 +20,7 @@ mod input;
 mod input_mode;
 #[cfg(target_os = "linux")]
 mod linux;
+pub mod language;
 pub mod macros;
 pub mod manager;
 pub mod native_preference;
@@ -52,6 +53,7 @@ pub use gpu::*;
 pub use init::*;
 pub use input::*;
 pub use input_mode::*;
+pub use language::*;
 #[cfg(target_os = "linux")]
 pub use linux::*;
 pub use native_preference::*;
