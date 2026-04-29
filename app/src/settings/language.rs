@@ -1,7 +1,9 @@
 //! Settings for UI display language / internationalization.
 
 use serde::{Deserialize, Serialize};
-use settings::{macros::define_settings_group, RespectUserSyncSetting, Setting, SupportedPlatforms, SyncToCloud};
+use settings::{
+    macros::define_settings_group, RespectUserSyncSetting, Setting, SupportedPlatforms, SyncToCloud,
+};
 use warpui::{AppContext, SingletonEntity};
 
 use crate::i18n;
@@ -19,7 +21,10 @@ use crate::i18n;
     schemars::JsonSchema,
     settings_value::SettingsValue,
 )]
-#[schemars(description = "The language used for the Warp UI.", rename_all = "snake_case")]
+#[schemars(
+    description = "The language used for the Warp UI.",
+    rename_all = "snake_case"
+)]
 pub enum DisplayLanguage {
     /// English (default)
     #[default]

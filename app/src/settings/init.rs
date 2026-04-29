@@ -32,15 +32,17 @@ use crate::{
 use warp_core::semantic_selection::SemanticSelection;
 
 use super::{
-    app_icon::AppIconSettings, app_installation_detection::UserAppInstallDetectionSettings,
-    cloud_preferences::CloudPreferencesSettings, initializer::SettingsInitializer,
+    app_icon::AppIconSettings,
+    app_installation_detection::UserAppInstallDetectionSettings,
+    cloud_preferences::CloudPreferencesSettings,
+    initializer::SettingsInitializer,
     language::{apply_language_setting, LanguageSettings},
-    native_preference::NativePreferenceSettings, AISettings, AccessibilitySettings,
-    AliasExpansionSettings, AppEditorSettings, BlockVisibilitySettings, ChangelogSettings,
-    CodeSettings, DebugSettings, EmacsBindingsSettings, FontSettings, FontSettingsChangedEvent,
-    GPUSettings, InputBoxType, InputModeSettings, InputSettings, PaneSettings,
-    SameLinePromptBlockSettings, ScrollSettings, SelectionSettings, SshSettings, ThemeSettings,
-    VimBannerSettings, WarpDrivePrivacySettings,
+    native_preference::NativePreferenceSettings,
+    AISettings, AccessibilitySettings, AliasExpansionSettings, AppEditorSettings,
+    BlockVisibilitySettings, ChangelogSettings, CodeSettings, DebugSettings, EmacsBindingsSettings,
+    FontSettings, FontSettingsChangedEvent, GPUSettings, InputBoxType, InputModeSettings,
+    InputSettings, PaneSettings, SameLinePromptBlockSettings, ScrollSettings, SelectionSettings,
+    SshSettings, ThemeSettings, VimBannerSettings, WarpDrivePrivacySettings,
 };
 
 pub struct UserDefaultsOnStartup {
