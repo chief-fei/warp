@@ -1,8 +1,8 @@
 //! Settings for UI display language / internationalization.
 
 use serde::{Deserialize, Serialize};
-use settings::{macros::define_settings_group, RespectUserSyncSetting, SupportedPlatforms, SyncToCloud};
-use warpui::{AppContext, Entity, SingletonEntity};
+use settings::{macros::define_settings_group, RespectUserSyncSetting, Setting, SupportedPlatforms, SyncToCloud};
+use warpui::{AppContext, SingletonEntity};
 
 use crate::i18n;
 
