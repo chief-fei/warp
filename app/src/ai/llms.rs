@@ -36,6 +36,7 @@ pub fn is_using_api_key_for_provider(provider: &LLMProvider, app: &AppContext) -
         LLMProvider::OpenAI => api_keys.is_some_and(|keys| keys.openai.is_some()),
         LLMProvider::Anthropic => api_keys.is_some_and(|keys| keys.anthropic.is_some()),
         LLMProvider::Google => api_keys.is_some_and(|keys| keys.google.is_some()),
+        LLMProvider::DeepSeek => api_keys.is_some_and(|keys| keys.deepseek.is_some()),
         _ => false,
     }
 }
@@ -88,6 +89,7 @@ pub enum LLMProvider {
     OpenAI,
     Anthropic,
     Google,
+    DeepSeek,
     Xai,
     Unknown,
 }
@@ -99,6 +101,7 @@ impl LLMProvider {
             LLMProvider::OpenAI => Some(Icon::OpenAILogo),
             LLMProvider::Anthropic => Some(Icon::ClaudeLogo),
             LLMProvider::Google => Some(Icon::GeminiLogo),
+            LLMProvider::DeepSeek => Some(Icon::DeepSeekLogo),
             LLMProvider::Xai => None,
             LLMProvider::Unknown => None,
         }
